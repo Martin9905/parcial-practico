@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CiudadEntity } from 'src/ciudad/ciudad.entity';
-import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
-import { SupermercadoEntity } from 'src/supermercado/supermercado.entity';
+import { CiudadEntity } from '../ciudad/ciudad.entity';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
+import { SupermercadoEntity } from '../supermercado/supermercado.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -38,7 +38,6 @@ export class CiudadSupermercadoService {
           throw new BusinessLogicException("La ciudad con el id dado no fue encontrada", BusinessError.NOT_FOUND)
    
         const supermercadoCiudad: SupermercadoEntity = ciudad.supermercados.find(e => e.id === supermercado.id);
-   
         if (!supermercadoCiudad)
           throw new BusinessLogicException("El supermercado con el id dado no esta asociado a esa ciudad", BusinessError.PRECONDITION_FAILED)
    
