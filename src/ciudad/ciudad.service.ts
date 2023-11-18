@@ -25,7 +25,7 @@ export class CiudadService {
 
     async create(ciudad: CiudadEntity): Promise<CiudadEntity> {
         if(!ciudad.nombre  || !ciudad.pais || !ciudad.numeroDeHabitantes){
-            throw new BusinessLogicException("falta una propiedad obligatoria en la petición", BusinessError.BAD_REQUEST);
+            throw new BusinessLogicException("Falta una propiedad obligatoria en la petición", BusinessError.BAD_REQUEST);
         }
         const listaDePaises: string[] = ['Argentina', 'Ecuador', 'Paraguay']
         if(!listaDePaises.includes(ciudad.pais)){

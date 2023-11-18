@@ -10,11 +10,11 @@ export class SupermercadoEntity {
     @Column()
     nombre: string;
 
-    @Column()
-    longitud: string;
+    @Column('decimal', { precision: 10, scale: 6 })
+    longitud: number;
 
-    @Column()
-    latitud: string;
+    @Column('decimal', { precision: 10, scale: 6 })
+    latitud: number;
 
     @Column()
     paginaWeb: string;

@@ -25,7 +25,7 @@ export class SupermercadoService {
 
     async create(supermercado: SupermercadoEntity): Promise<SupermercadoEntity> {
         if(!supermercado.nombre  || !supermercado.latitud || !supermercado.longitud ||!supermercado.paginaWeb){
-            throw new BusinessLogicException("falta una propiedad obligatoria en la petición", BusinessError.BAD_REQUEST);
+            throw new BusinessLogicException("Falta una propiedad obligatoria en la petición", BusinessError.BAD_REQUEST);
         }
         if(supermercado.nombre.length > 10){
             throw new BusinessLogicException("El nombre del supermercado recibido tiene mas de 10 caracteres", BusinessError.BAD_REQUEST);
