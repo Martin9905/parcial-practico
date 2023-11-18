@@ -131,5 +131,4 @@ describe('CiudadService', () => {
     await expect(() => service.delete("0")).rejects.toHaveProperty("message", "La ciudad con el id ingresado no fue encontrada")
   });
 
-
 });
