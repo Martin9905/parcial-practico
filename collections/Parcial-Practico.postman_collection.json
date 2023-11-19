@@ -1,0 +1,1801 @@
+{
+	"info": {
+		"_postman_id": "44c7ddc0-fcf6-47d7-8206-0f81b102cf5f",
+		"name": "Parcial-Practico",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5664057"
+	},
+	"item": [
+		{
+			"name": "Ciudad",
+			"item": [
+				{
+					"name": "crear una ciudad valida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"city_id\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function(){",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Buenos Aires\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cities",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "crear una ciudad valida",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Buenos Aires\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/cities",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"4271ccb2-1514-489f-8f6d-ae6a4d7d50b9\",\n    \"nombre\": \"Buenos Aires\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000\n}"
+						}
+					]
+				},
+				{
+					"name": "crear una ciudad invalida",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"city_id\", data.id);",
+									"",
+									"pm.test(\"Status code is 400\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Bogota DC\",\n    \"pais\": \"Colombia\",\n    \"numeroDeHabitantes\": 7810000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cities",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "crear una ciudad invalida",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Bogota DC\",\n    \"pais\": \"Colombia\",\n    \"numeroDeHabitantes\": 7810000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/cities",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400,\n    \"message\": \"El pais al que pertenece la ciudad no esta en la lista de paises aceptados\"\n}"
+						}
+					]
+				},
+				{
+					"name": "obtener todas las ciudades",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Number of cities > ' +0, function () {",
+									"    var data = pm.response.json()",
+									"    pm.expect(data.lenght).to.greaterThan(0)",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener todas las ciudades",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"93629c2c-94cf-48c3-9e98-64721ca865d1\",\n        \"nombre\": \"Buenos Aires\",\n        \"pais\": \"Argentina\",\n        \"numeroDeHabitantes\": 15370000,\n        \"supermercados\": [\n            {\n                \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n                \"nombre\": \"Exito\",\n                \"longitud\": 10,\n                \"latitud\": 11,\n                \"paginaWeb\": \"https://www.exito.com/\"\n            },\n            {\n                \"id\": \"1e4d72cc-0fd3-4399-aef4-4d5a69712d75\",\n                \"nombre\": \"Jumbo\",\n                \"longitud\": 50,\n                \"latitud\": 23,\n                \"paginaWeb\": \"https://www.jumbo.com.ar/\"\n            }\n        ]\n    },\n    {\n        \"id\": \"2da10a0a-9441-4b95-9bd7-b35244b5f379\",\n        \"nombre\": \"La Plata\",\n        \"pais\": \"Argentina\",\n        \"numeroDeHabitantes\": 787294,\n        \"supermercados\": [\n            {\n                \"id\": \"c73523af-af4f-4870-9aa6-c1118be4ba7f\",\n                \"nombre\": \"Fake1\",\n                \"longitud\": 20,\n                \"latitud\": 21,\n                \"paginaWeb\": \"https://www.faker1.com.ar/\"\n            },\n            {\n                \"id\": \"0de94161-7bba-4e2e-8051-dff6b86f7a58\",\n                \"nombre\": \"Fake2\",\n                \"longitud\": 87,\n                \"latitud\": 13,\n                \"paginaWeb\": \"https://www.faker2.com.ar/\"\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "obtener una ciudad por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener una ciudad por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"93629c2c-94cf-48c3-9e98-64721ca865d1\",\n    \"nombre\": \"Buenos Aires\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000,\n    \"supermercados\": [\n        {\n            \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n            \"nombre\": \"Exito\",\n            \"longitud\": 10,\n            \"latitud\": 11,\n            \"paginaWeb\": \"https://www.exito.com/\"\n        },\n        {\n            \"id\": \"1e4d72cc-0fd3-4399-aef4-4d5a69712d75\",\n            \"nombre\": \"Jumbo\",\n            \"longitud\": 50,\n            \"latitud\": 23,\n            \"paginaWeb\": \"https://www.jumbo.com.ar/\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "obtener una ciudad por un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eq(\"La ciudad con el id dado no fue encontrada\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener una ciudad por un ID que no existe",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La ciudad con el id dado no fue encontrada\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"BUENOS AIRES\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15360000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar una ciudad",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"BUENOS AIRES\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15360000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"4271ccb2-1514-489f-8f6d-ae6a4d7d50b9\",\n    \"nombre\": \"BUENOS AIRES\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15360000\n}"
+						}
+					]
+				},
+				{
+					"name": "Actualizar una ciudad con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404)",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eq(\"La ciudad con el id ingresado no fue encontrada\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Nuevo Nombre\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cities/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Actualizar una ciudad con un ID que no existe",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Nuevo Nombre\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/cities/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La ciudad con el id ingresado no fue encontrada\"\n}"
+						}
+					]
+				},
+				{
+					"name": "eliminar una ciudad por su ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eliminar una ciudad por su ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "eliminar una ciudad con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404)",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eq(\"La ciudad con el id ingresado no fue encontrada\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eliminar una ciudad con un ID que no existe",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"La ciudad con el id ingresado no fue encontrada\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Supermercado",
+			"item": [
+				{
+					"name": "crear un supermercado valido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"supermarket_id\", data.id);",
+									"",
+									"pm.test(\"Status code is 201\", function(){",
+									"    pm.response.to.have.status(201);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Exito\",\n    \"longitud\": 10,\n    \"latitud\": 11,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/supermarkets",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "crear un supermercado valido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Exito\",\n    \"longitud\": 10,\n    \"latitud\": 11,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/supermarkets",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n    \"nombre\": \"Exito\",\n    \"longitud\": 10,\n    \"latitud\": 11,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "crear un supermercado invalido",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var data = pm.response.json()",
+									"pm.globals.set(\"supermarket_id\", data.id);",
+									"",
+									"pm.test(\"Status code is 400\", function() {",
+									"    pm.response.to.have.status(400);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"Supermercado con nombre largo\",\n    \"longitud\": 10,\n    \"latitud\": 11,\n    \"paginaWeb\": \"https://www.supermercado.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/supermarkets",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "crear un supermercado invalido",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"Supermercado con nombre largo\",\n    \"longitud\": 10,\n    \"latitud\": 11,\n    \"paginaWeb\": \"https://www.supermercado.com/\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/supermarkets",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 400\n    \"message\": \"El nombre del supermercado recibido tiene mas de 10 caracteres\"\n}"
+						}
+					]
+				},
+				{
+					"name": "obtener todos los supermercados",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Number of supermarkets > ' +0, function () {",
+									"    var data = pm.response.json()",
+									"    pm.expect(data.lenght).to.greaterThan(0)",
+									"});",
+									"",
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/supermarkets",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener todos los supermercados",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/supermarkets",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n        \"nombre\": \"Exito\",\n        \"longitud\": 10,\n        \"latitud\": 11,\n        \"paginaWeb\": \"https://www.exito.com/\",\n        \"sedes\": [\n            {\n                \"id\": \"93629c2c-94cf-48c3-9e98-64721ca865d1\",\n                \"nombre\": \"Buenos Aires\",\n                \"pais\": \"Argentina\",\n                \"numeroDeHabitantes\": 15370000\n            }\n        ]\n    },\n    {\n        \"id\": \"1e4d72cc-0fd3-4399-aef4-4d5a69712d75\",\n        \"nombre\": \"Jumbo\",\n        \"longitud\": 50,\n        \"latitud\": 23,\n        \"paginaWeb\": \"https://www.jumbo.com.ar/\",\n        \"sedes\": [\n            {\n                \"id\": \"93629c2c-94cf-48c3-9e98-64721ca865d1\",\n                \"nombre\": \"Buenos Aires\",\n                \"pais\": \"Argentina\",\n                \"numeroDeHabitantes\": 15370000\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "obtener un supermercado por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200)",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/supermarkets/{{supermarket_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets",
+								"{{supermarket_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener un supermercado por ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/supermarkets/{{supermarket_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets",
+										"{{supermarket_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n    \"nombre\": \"Exito\",\n    \"longitud\": 10,\n    \"latitud\": 11,\n    \"paginaWeb\": \"https://www.exito.com/\",\n    \"sedes\": [\n        {\n            \"id\": \"93629c2c-94cf-48c3-9e98-64721ca865d1\",\n            \"nombre\": \"Buenos Aires\",\n            \"pais\": \"Argentina\",\n            \"numeroDeHabitantes\": 15370000\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "obtener un supermercado por un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eq(\"El supermercado con el id dado no fue encontrado\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/supermarkets/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener un supermercado por un ID que no existe",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/supermarkets/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El supermercado con el id dado no fue encontrado\"\n}"
+						}
+					]
+				},
+				{
+					"name": "actualizar un supermercado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"EXITO\",\n    \"longitud\": 11,\n    \"latitud\": 12,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/supermarkets/{{supermarket_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets",
+								"{{supermarket_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "actualizar un supermercado",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"EXITO\",\n    \"longitud\": 11,\n    \"latitud\": 12,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/supermarkets/{{supermarket_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets",
+										"{{supermarket_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n    \"nombre\": \"EXITO\",\n    \"longitud\": 11,\n    \"latitud\": 12,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "actualizar un supermercado con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404)",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eq(\"El supermercado con el id ingresado no fue encontrado\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"EXITO\",\n    \"longitud\": 11,\n    \"latitud\": 12,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/supermarkets/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "actualizar un supermercado con un ID que no existe",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"nombre\": \"EXITO\",\n    \"longitud\": 11,\n    \"latitud\": 12,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/supermarkets/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404\n    \"message\": \"El supermercado con el id ingresado no fue encontrado\"\n}"
+						}
+					]
+				},
+				{
+					"name": "eliminar un supermercado por su ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/supermarkets/{{supermarket_id}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets",
+								"{{supermarket_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eliminar un supermercado por su ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/supermarkets/{{supermarket_id}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets",
+										"{{supermarket_id}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "eliminar un supermercado con un ID que no existe",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404)",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function() {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eq(\"El supermercado con el id ingresado no fue encontrado\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/supermarkets/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"supermarkets",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eliminar un supermercado con un ID que no existe",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/supermarkets/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"supermarkets",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404\n    \"message\": \"El supermercado con el id ingresado no fue encontrado\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Asociacion",
+			"item": [
+				{
+					"name": "asociar un nuevo supermercado a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets",
+								"{{supermarket_id_1}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "asociar un nuevo supermercado a una ciudad",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_1}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets",
+										"{{supermarket_id_1}}"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"93629c2c-94cf-48c3-9e98-64721ca865d1\",\n    \"nombre\": \"Buenos Aires\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000,\n    \"supermercados\": [\n        {\n            \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n            \"nombre\": \"Exito\",\n            \"longitud\": 10,\n            \"latitud\": 11,\n            \"paginaWeb\": \"https://www.exito.com/\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "asociar un supermercado que no existe a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eql(\"El supermercado con el id dado no fue encontrado\")",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/00000000-0000-0000-0000-000000000000",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets",
+								"00000000-0000-0000-0000-000000000000"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "asociar un supermercado que no existe a una ciudad",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/00000000-0000-0000-0000-000000000000",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets",
+										"00000000-0000-0000-0000-000000000000"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404\n    \"message\": \"El supermercado con el id dado no fue encontrado\"\n}"
+						}
+					]
+				},
+				{
+					"name": "obtener todos los supermercados que pertenecen a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener todos los supermercados que pertenecen a una ciudad",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n        \"nombre\": \"Exito\",\n        \"longitud\": 10,\n        \"latitud\": 11,\n        \"paginaWeb\": \"https://www.exito.com/\"\n    },\n    {\n        \"id\": \"1e4d72cc-0fd3-4399-aef4-4d5a69712d75\",\n        \"nombre\": \"Jumbo\",\n        \"longitud\": 50,\n        \"latitud\": 23,\n        \"paginaWeb\": \"https://www.jumbo.com.ar/\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "obtener un supermercado asociado a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets",
+								"{{supermarket_id_1}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener un supermercado asociado a una ciudad",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_1}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets",
+										"{{supermarket_id_1}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n    \"nombre\": \"Exito\",\n    \"longitud\": 10,\n    \"latitud\": 11,\n    \"paginaWeb\": \"https://www.exito.com/\"\n}"
+						}
+					]
+				},
+				{
+					"name": "obtener un supermercado que no esta asociado a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 412\", function () {",
+									"    pm.response.to.have.status(412);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eql(\"El supermercado con el id dado no esta asociado a esa ciudad\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets",
+								"{{supermarket_id_2}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "obtener un supermercado que no esta asociado a una ciudad",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_2}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets",
+										"{{supermarket_id_2}}"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El supermercado con el id dado no esta asociado a esa ciudad\"\n}"
+						}
+					]
+				},
+				{
+					"name": "actualizar los supermercados que estan asociados a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"4322ea99-922b-4481-b393-734357808708\",\n        \"nombre\": \"New\",\n        \"longitud\": 30,\n        \"latitud\": 12,\n        \"paginaWeb\": \"https://www.new.com.ar/\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "actualizar los supermercados que estan asociados a una ciudad",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"id\": \"4322ea99-922b-4481-b393-734357808708\",\n        \"nombre\": \"New\",\n        \"longitud\": 30,\n        \"latitud\": 12,\n        \"paginaWeb\": \"https://www.new.com.ar/\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"id\": \"93629c2c-94cf-48c3-9e98-64721ca865d1\",\n    \"nombre\": \"Buenos Aires\",\n    \"pais\": \"Argentina\",\n    \"numeroDeHabitantes\": 15370000,\n    \"supermercados\": [\n        {\n            \"id\": \"157ce3b5-f3a9-496b-abad-f6cfec901cb1\",\n            \"nombre\": \"Exito\",\n            \"longitud\": 10,\n            \"latitud\": 11,\n            \"paginaWeb\": \"https://www.exito.com/\"\n        },\n        {\n            \"id\": \"1e4d72cc-0fd3-4399-aef4-4d5a69712d75\",\n            \"nombre\": \"Jumbo\",\n            \"longitud\": 50,\n            \"latitud\": 23,\n            \"paginaWeb\": \"https://www.jumbo.com.ar/\"\n        },\n        {\n            \"id\": \"4322ea99-922b-4481-b393-734357808708\",\n            \"nombre\": \"New\",\n            \"longitud\": 30,\n            \"latitud\": 12,\n            \"paginaWeb\": \"https://www.new.com.ar/\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "actualizar los supermercados asociados a una ciudad, con un supermercado inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eql(\"El supermercado con el id dado no fue encontrado\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"id\": \"00000000-0000-0000-0000-000000000000\",\n        \"nombre\": \"New\",\n        \"longitud\": 30,\n        \"latitud\": 12,\n        \"paginaWeb\": \"https://www.new.com.ar/\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "actualizar los supermercados asociados a una ciudad, con un supermercado inexistente",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"id\": \"00000000-0000-0000-0000-000000000000\",\n        \"nombre\": \"New\",\n        \"longitud\": 30,\n        \"latitud\": 12,\n        \"paginaWeb\": \"https://www.new.com.ar/\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 404,\n    \"message\": \"El supermercado con el id dado no fue encontrado\"\n}"
+						}
+					]
+				},
+				{
+					"name": "eliminar un supermercado asociado a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_2}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets",
+								"{{supermarket_id_2}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eliminar un supermercado asociado a una ciudad",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_2}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets",
+										"{{supermarket_id_2}}"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "eliminar un supermercado que no estaba previamente asociado a una ciudad",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 412\", function () {",
+									"    pm.response.to.have.status(412);",
+									"});",
+									"",
+									"pm.test(\"Get expected error message\", function () {",
+									"    var data = pm.response.json();",
+									"    pm.expect(data.message).to.eql(\"El supermercado con el id dado no esta asociado a esa ciudad\")",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_1}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"cities",
+								"{{city_id}}",
+								"supermarkets",
+								"{{supermarket_id_1}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "eliminar un supermercado que no estaba previamente asociado a una ciudad",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/cities/{{city_id}}/supermarkets/{{supermarket_id_1}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"cities",
+										"{{city_id}}",
+										"supermarkets",
+										"{{supermarket_id_1}}"
+									]
+								}
+							},
+							"status": "Precondition Failed",
+							"code": 412,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"statusCode\": 412,\n    \"message\": \"El supermercado con el id dado no esta asociado a esa ciudad\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:3000/api/v1"
+		},
+		{
+			"key": "supermarket_id_1",
+			"value": "6595022d-784c-4d7e-910c-43e57ea4308d"
+		},
+		{
+			"key": "supermarket_id_2",
+			"value": "1cc34242-d0fc-49a2-b9b4-5e54aaa48935"
+		}
+	]
+}
